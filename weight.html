@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>مراقبة الوزن</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 50px;
+      background-color: #eef;
+    }
+
+    .circle {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background-color: grey;
+    }
+
+    .active {
+      background-color: green;
+      box-shadow: 0 0 20px green;
+    }
+
+    .message {
+      font-size: 20px;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>مراقبة الوزن</h1>
+
+  <div id="circle" class="circle"></div>
+  <div id="msg" class="message">📦 تم اكتشاف وزن!</div>
+
+  <script>
+    function checkWeight() {
+      fetch("weight.json")
+        .then(res => res.json())
+        .then(data => {
+          if (data.weight == 1) {
+            document.getElementById("circle").classList.add("active");
+            document.getElementById("msg").style.display = "block";
+          }
+        });
+    }
+
+    setInterval(checkWeight, 3000);
+  </script>
+
+</body>
+</html>
