@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>الرئيسية</title>
+  <style>
+    .notification {
+      display: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ffcc00;
+      padding: 15px;
+      border-radius: 10px;
+      color: #000;
+      box-shadow: 0 0 10px #888;
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 style="text-align: center;">مرحبًا يا تسنيم 😊</h1>
+
+  <div id="notif" class="notification">
+    🚨 تم اكتشاف أن اللمبة منورة!
+  </div>
+
+  <script>
+    function checkStatus() {
+      fetch("status.json")
+        .then(res => res.json())
+        .then(data => {
+          if (data.led == 1) {
+            document.getElementById("notif").style.display = "block";
+          } else {
+            document.getElementById("notif").style.display = "none";
+          }
+        });
+    }
+
+    setInterval(checkStatus, 3000); // فحص كل 3 ثواني
+  </script>
+
+</body>
+</html>
